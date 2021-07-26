@@ -1,34 +1,43 @@
 <template>
   <div id="nav">
       <router-link class="navitem" to="/"><img src="https://www.searchpng.com/wp-content/uploads/2019/01/Myntra-logo-png-icon.png" width="50" alt=""></router-link> 
-    <!-- <router-link class="navitem" to="/">Home</router-link>  -->
-    <!-- <router-link class="navitem" to="/about">About</router-link>  -->
-    <!-- <router-link class="navitem" to="/categories">Categories</router-link> -->
-     <router-link class="navitem" to="/Menclothing">MEN</router-link>
-    <router-link class="navitem" to="/Womenclothing">WOMEN</router-link>
-    <router-link class="navitem" to="/electronics">ELECTRONICS</router-link>
-    <router-link class="navitem" :to="{ name: 'Jewelery' }">JEWELERY</router-link>  
+   
+     <router-link class="navitem" :to="{ name: 'category' , params:{category: mencolthes} }">MEN</router-link>
+    <router-link class="navitem" :to="{ name: 'category' , params:{category: womencolthes} }">WOMEN</router-link>
+    <router-link class="navitem" :to="{ name: 'category' , params:{category: electronics} }">ELECTRONICS</router-link>
+    <router-link class="navitem" :to="{ name: 'category' , params:{category: jewelery} }">JEWELERY</router-link>  
   </div>
   <router-view/>
 
 </template>
 <script>
+import axios from 'axios';
 export default {
   data(){
     return{
-      apidata:""
+      apidata:"",
+      mencolthes:"men's clothing",
+      womencolthes:"women's clothing",
+      electronics:"electronics",
+      jewelery:"jewelery",
     }
 
   },
    mounted(){
          var url = "https://fakestoreapi.com/products/categories";
-        fetch(url).then((response)=>{
-            return response.json();
-        }).then((data)=>{
-            console.log(data);
-            this.apidata=data;
-            console.log(data);
+          axios.get(url)
+          .then((resp)=>{
+            this.apidata=resp.data;
+            console.log(resp);
         })
+       
+       // fetch(url).then((response)=>{
+        //     return response.json();
+        // }).then((data)=>{
+        //     console.log(data);
+        //     this.apidata=data;
+        //     console.log(data);
+        // })
     }
 
 }

@@ -1,9 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import categories from '../views/categories.vue'
-import electronics from '../views/electronics.vue'
-import Jewelery from '../views/Jewelery.vue'
-import itemPurchagePage from '../views/ItemPurchacePage.vue'
+import category from '../views/category.vue'
+import product from '../views/product.vue'
 
 const routes = [
   {
@@ -12,24 +10,15 @@ const routes = [
     component: Home
   },
   {
-    path: '/categories',
-    name: 'categories',
-    component: categories
-  },
-  {
-    path: '/electronics',
-    name: 'electronics',
-    component: electronics
-  },
-  {
-    path: '/Jewelery',
-    name: 'Jewelery',
-    component: Jewelery
+    path: '/category/:category',
+    name: 'category',
+    component: category,
+    props: true
   },
 {
-path: '/Jewelery/:id',
-name: 'ItemPurchacePage',
-component: itemPurchagePage,
+path: '/product/:title',
+name: 'product',
+component: product,
 props: true
 }
   
