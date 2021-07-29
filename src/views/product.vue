@@ -5,8 +5,9 @@
           <td class="td" id="imgtd"><img v-bind:src="image"  alt=""></td>
           
           <td class="td" id="datatd">
-              
-               <h1 class="itemstd" style="color:green">$. {{price}}</h1>
+               <h1 >50% OFF Sale</h1>
+               <h1 class="itemstd"  style="color:green;"> {{accountInUSD}}</h1>
+               <h4 id="oldprice">{{ price }} </h4><b>Old Price</b>
                <h2 class="itemstd">{{title}} </h2>
           
            <h1 class="itemstd">Category: {{category}}</h1>
@@ -29,6 +30,12 @@
 
 export default {
    props:['id','title','price','description','category','image'],
+    computed: {
+      accountInUSD() {
+        return '$' + this.price/2
+      }
+    }
+   
     // data(){
     //     return{
     //         id:this.$route.params.id
@@ -40,6 +47,10 @@ export default {
 </script>
 
 <style>
+#oldprice{
+    color: red;
+    text-decoration: line-through;
+}
 .item{
     width: 100%;
 }

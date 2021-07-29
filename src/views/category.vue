@@ -3,12 +3,12 @@
 
 
   <div >
-  <div class="category" v-for="category in categoryData" :key="category.id">
+  <div class="category" v-for="category in categoryData" :key="category.id  ">
  <router-link :to="{name: 'product', params:{ id: category.id, title: category.title, price:category.price, description:category.description ,category:category.category, image:category.image }}">
     <div class="cateitem">   
     
      <img v-bind:src="category.image" width="100" height="100" alt="">
-      <p > Price: {{category.price}}</p>
+      <p >Old Price: {{category.price}} Offer Price:{{ currencyUSD(category) }}  </p>
       <p >{{category.title}}</p>
       
   </div>
@@ -20,14 +20,23 @@
 <script>
 import axios from 'axios';
 export default {
+  
      data(){
     return{
       categoryData:"",
-
+      price:""
+    
     }
 
   },
+  methods:{
+  currencyUSD(category){
+return category.price /2;
+  }
+  },
 props:['category'],
+
+ 
 
  mounted(){
   
@@ -35,7 +44,8 @@ props:['category'],
           axios.get(url)
           .then((resp)=>{
             this.categoryData=resp.data;
-            console.log(resp);
+            this.price=resp.data;
+            console.log(resp.data[0].price);
         })
         // fetch(url).then((response)=>{
         //     return response.json();
@@ -53,7 +63,7 @@ props:['category'],
           .then((resp)=>{
             // return response.json();
             this.categoryData=resp.data;
-            console.log(resp);
+            // console.log(resp);
         })
         //  var url = "https://fakestoreapi.com/products/category/"+this.category ;
         // fetch(url).then((response)=>{
