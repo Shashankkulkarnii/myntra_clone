@@ -3,12 +3,12 @@
 
 
   <div >
-  <div class="category" v-for="category in categoryData" :key="category.id  ">
- <router-link :to="{name: 'product', params:{ id: category.id, title: category.title, price:category.price, description:category.description ,category:category.category, image:category.image }}">
+  <div class="category" v-for="product in productData" :key="product.id  ">
+ <router-link :to="{name: 'product', params:{ id: product.id, title: product.title, price:product.price, description:product.description ,category:product.category, image:product.image }}">
     <div class="cateitem">   
     
-     <img v-bind:src="category.image" width="100" height="100" alt="">
-      <p >Old Price: {{category.price}} Offer Price:{{ currencyUSD(category) }}  </p>
+     <img v-bind:src="product.image" width="100" height="100" alt="">
+      <p >Old Price: {{product.price}} Offer Price:{{ currencyUSD(product.price) }}  </p>
       <p >{{category.title}}</p>
       
   </div>
@@ -23,15 +23,13 @@ export default {
   
      data(){
     return{
-      categoryData:"",
-      price:""
-    
+      productData:"",
     }
 
   },
   methods:{
-  currencyUSD(category){
-return category.price /2;
+  currencyUSD(productPrice){
+return productPrice /2;
   }
   },
 props:['category'],
@@ -43,38 +41,17 @@ props:['category'],
          var url = "https://fakestoreapi.com/products/category/"+this.category ;
           axios.get(url)
           .then((resp)=>{
-            this.categoryData=resp.data;
-            this.price=resp.data;
-            console.log(resp.data[0].price);
+            this.productData=resp.data;       
         })
-        // fetch(url).then((response)=>{
-        //     return response.json();
-        // }).then((data)=>{
-        //     console.log(data);
-        //     this.categoryData=data;
-        //     console.log(data);
-            
-        // })
     },
     updated(){
 
       var url = "https://fakestoreapi.com/products/category/"+this.category ;
           axios.get(url)
           .then((resp)=>{
-            // return response.json();
-            this.categoryData=resp.data;
-            // console.log(resp);
+            this.productData=resp.data;
+           
         })
-        //  var url = "https://fakestoreapi.com/products/category/"+this.category ;
-        // fetch(url).then((response)=>{
-        //     return response.json();
-        // }).then((data)=>{
-        //     console.log(data);
-        //     this.categoryData=data;
-            
-            
-        // })
-
     }
 }
 
