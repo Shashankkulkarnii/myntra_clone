@@ -1,16 +1,23 @@
 <template>
   <div id="nav">
-      <router-link class="navitem" to="/"><img src="https://www.searchpng.com/wp-content/uploads/2019/01/Myntra-logo-png-icon.png" width="50" alt=""></router-link> 
+      <router-link class="navitem" to="/home"><img src="https://www.searchpng.com/wp-content/uploads/2019/01/Myntra-logo-png-icon.png" width="50" alt=""></router-link> 
    
      <router-link class="navitem" :to="{ name: 'category' , params:{category: mencolthes} }">MEN</router-link>
     <router-link class="navitem" :to="{ name: 'category' , params:{category: womencolthes} }">WOMEN</router-link>
     <router-link class="navitem" :to="{ name: 'category' , params:{category: electronics} }">ELECTRONICS</router-link>
     <router-link class="navitem" :to="{ name: 'category' , params:{category: jewelery} }">JEWELERY</router-link>  
-  </div>
-  <router-view/>
+    <router-link class="navitem" id="login"   :to="{ name: 'login'}">{{updateusername}}</router-link>  
+    <!-- <router-link class="navitem" id="login" v-if="'Sign in' === 'Sign in'"   :to="{name: 'category' , params:{category: mencolthes}}">hello</router-link> -->
+    <!-- <router-link class="navitem" id="login" v-else  :to="{ name: 'Home'}">{{updateusername}}</router-link>   -->
 
+  </div>
+  <br>
+  <div style="margin-top:60px">
+  <router-view/>
+</div>
 </template>
 <script>
+import store from './store'
 import axios from 'axios';
 export default {
   data(){
@@ -20,31 +27,56 @@ export default {
       womencolthes:"women's clothing",
       electronics:"electronics",
       jewelery:"jewelery",
+      store:store,
+      signin_user:null,
+      userName:""
     }
 
   },
+  computed:{
+    updateusername: function(){
+      if(store.state.logedinUeser[1] == null){
+        return "Sign in "
+      }
+      else{
+        return store.state.logedinUeser[1].name
+      }
+
+    }
+
+  },
+  created(){
+  
+  },
    mounted(){
+        
+     
          var url = "https://fakestoreapi.com/products/categories";
           axios.get(url)
           .then((resp)=>{
             this.apidata=resp.data;
             console.log(resp);
+             
         })
-       
-       // fetch(url).then((response)=>{
-        //     return response.json();
-        // }).then((data)=>{
-        //     console.log(data);
-        //     this.apidata=data;
-        //     console.log(data);
-        // })
+     
+      
+          
+    },
+    updated(){
+     this.userName=store.state.logedinUser.name
+
+    }
+    
+   
+
     }
 
-}
+
 
 </script>
 
-<style>
+<style scoped>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -68,9 +100,6 @@ padding-top: 10px;
   color: #2c3e50;
 }
 
-#nav a.router-link-exact-active {
-  /* color: #42b983; */
-}
 
 .navitem{
   margin-left: 20px;
@@ -78,5 +107,9 @@ padding-top: 10px;
   text-decoration: none;
   line-height: 50px;
   font-family: 'Open Sans', sans-serif;
+}
+#login{
+  float: right;
+  margin-right: 30px;
 }
 </style>

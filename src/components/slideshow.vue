@@ -20,7 +20,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .banner{
     /* margin-top: 200px; */
 

@@ -1,6 +1,7 @@
 <template>
     
       <h3 class="headings">DEALS OF THE DAY</h3>
+      <!-- <h1>hello{{store.state.logedinUeser[1]}}</h1> -->
 <div class="content">
           <img class="contentItems" width="200px" height="400px" src="https://assets.myntassets.com/f_webp,w_196,c_limit,fl_progressive,dpr_2.0/assets/images/2021/7/23/bda2d2e0-5d8b-426f-9b43-505f69961d081627037786082-DEAL-TO-STEAL.jpg" alt="">
       
@@ -44,13 +45,18 @@
 </template>
 
 <script>
+// import store from '../store'
 
 export default {
-
+data(){
+    return{
+    //   store:store
+    }
+  },
 }
 </script>
 
-<style>
+<style scoped>
 .content{
     /* display: inline-block; */
     margin-top: 150px;

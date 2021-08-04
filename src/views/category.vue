@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 import axios from 'axios';
 export default {
   
@@ -57,9 +57,9 @@ props:['category'],
 
 </script>
 
-<style>
+<style scoped>
 .category{ 
-  
+  text-align: center;
   /* float: left; */
  margin: auto;
   /* margin-left: 0px; */

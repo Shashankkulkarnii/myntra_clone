@@ -7,11 +7,12 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import slideshow from '@/components/slideshow.vue'
 import content from '@/components/ContentHomePage.vue'
+// import store from '../store'
 
 
 export default {
@@ -19,8 +20,9 @@ export default {
   components: {
     HelloWorld,
     slideshow,
-    content
-  
-  }
+    content,
+    // store:store,
+    // logedinuser:store.state.logedinUeser[1]
+  },
 }
 </script>

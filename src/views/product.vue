@@ -46,7 +46,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #oldprice{
     color: red;
     text-decoration: line-through;
